@@ -1,18 +1,36 @@
 const {SHA256} = require('crypto-js');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+
+let password = '123abc!';
+
+// First arguementis the number of rounds bcrypt should run. The higher the slower
+// The slower the more difficult it is to make brute force attacks.
+// bcrypt.genSalt(120, (err, salt) => {
+//     bcrypt.hash(password, salt, (err, hash) => {
+//         console.log(hash);
+//     });
+// });
+
+let hashedPassword = '$2a$10$1ce6iMkbosM9fPMLMEpssegr3iOpPqdGd3ODhIido1cYQvjJA88WC';
 
 
-let data = {
-    id: 10,
-};
+bcrypt.compare('123!', hashedPassword, (err, res) => {
+    console.log(res);
+});
 
-let token = jwt.sign(data, '123abc');
-console.log(token);
 
-let decoded = jwt.verify(token, '123abc');
-
-console.log('Decoded: ', decoded);
-
+// let data = {
+//     id: 10,
+// };
+//
+// let token = jwt.sign(data, '123abc');
+// console.log(token);
+//
+// let decoded = jwt.verify(token, '123abc');
+//
+// console.log('Decoded: ', decoded);
+//
 
 // let message = 'I am  user number 3';
 //
